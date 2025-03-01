@@ -599,5 +599,7 @@
   "year_in_review": "Year In Review",
   "volume": "Volume",
   "call_number": "Call Number",
-  "more_information": "More Info"
+  "more_information": "More Info",
+  "manage_language": "Preferred Language",
+  "manage_appearance": "Appearance"
 }

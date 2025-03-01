@@ -6,6 +6,8 @@ import { PalaceProjectInstructions } from '../../components/Action/CheckOut/Pala
 import { LanguageContext } from '../../context/initialContext';
 import { EventScreen } from '../../screens/Event/Event';
 import { CreateVDXRequest } from '../../screens/GroupedWork/CreateVDXRequest';
+import { CreateLocalIllRequest } from '../../screens/GroupedWork/CreateLocalIllRequest';
+import { Editions } from '../../screens/GroupedWork/Editions';
 
 import { GroupedWorkScreen } from '../../screens/GroupedWork/GroupedWork';
 import { WhereIsIt } from '../../screens/GroupedWork/WhereIsIt';
@@ -29,6 +31,8 @@ import { BackIcon } from '../../themes/theme';
 import { getTermFromDictionary } from '../../translations/TranslationService';
 import { EditionsModal } from './BrowseStackNavigator';
 
+import TitleWithLogo from '../../components/TitleWithLogo'
+
 const AccountStackNavigator = () => {
      const { language } = React.useContext(LanguageContext);
      const Stack = createNativeStackNavigator();
@@ -42,21 +46,75 @@ const AccountStackNavigator = () => {
                     headerBackImage: () => <BackIcon />,
                }}>
                <Stack.Group>
-                    <Stack.Screen name="MyPreferences" component={PreferencesScreen} options={{ title: getTermFromDictionary(language, 'preferences') }} />
-                    <Stack.Screen name="SettingsBrowseCategories" component={Settings_BrowseCategories} options={{ title: getTermFromDictionary(language, 'manage_browse_categories') }} />
-                    <Stack.Screen name="SettingsNotificationOptions" component={Settings_NotificationOptions} options={{ title: getTermFromDictionary(language, 'notification_settings') }} />
+                    <Stack.Screen
+                         name="MyPreferences"
+                         component={PreferencesScreen}
+                         options={{
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'preferences');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'preferences')
+                         }}
+                    />
+                    <Stack.Screen
+                         name="SettingsBrowseCategories"
+                         component={Settings_BrowseCategories}
+                         options={{
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'manage_browse_categories');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'manage_browse_categories')
+                         }}
+                    />
+                    <Stack.Screen
+                         name="SettingsNotificationOptions"
+                         component={Settings_NotificationOptions}
+                         options={{
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'notification_settings');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'notification_settings')
+                         }}
+                    />
                </Stack.Group>
                <Stack.Group>
-                    <Stack.Screen name="MyProfile" component={MyProfile} options={{ title: getTermFromDictionary(language, 'contact_information') }} />
+                    <Stack.Screen
+                         name="MyProfile"
+                         component={MyProfile}
+                         options={{
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'contact_information');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'contact_information')
+                         }}
+                    />
                </Stack.Group>
                <Stack.Group>
-                    <Stack.Screen name="MyLinkedAccounts" component={MyLinkedAccounts} options={{ title: getTermFromDictionary(language, 'linked_accounts') }} />
+                    <Stack.Screen
+                         name="MyLinkedAccounts"
+                         component={MyLinkedAccounts}
+                         options={{
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'linked_accounts');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'linked_accounts')
+                         }}
+                    />
                </Stack.Group>
                <Stack.Group>
                     <Stack.Screen
                          name="MyHolds"
                          component={MyHolds}
                          options={{
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'titles_on_hold');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
                               title: getTermFromDictionary(language, 'titles_on_hold'),
                          }}
                     />
@@ -64,7 +122,11 @@ const AccountStackNavigator = () => {
                          name="MyHold"
                          component={GroupedWorkScreen}
                          options={({ route }) => ({
-                              title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                              header: () => {
+                                   const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                          })}
                          initialParams={{ prevRoute: 'MyHolds' }}
                     />
@@ -74,14 +136,22 @@ const AccountStackNavigator = () => {
                          name="MyCheckouts"
                          component={MyCheckouts}
                          options={{
-                              title: getTermFromDictionary(language, 'checked_out_titles'),
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'checked_out_titles');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'checked_out_titles'),
                          }}
                     />
                     <Stack.Screen
                          name="MyCheckout"
                          component={GroupedWorkScreen}
                          options={({ route }) => ({
-                              title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                              header: () => {
+                                   const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                          })}
                          initialParams={{ prevRoute: 'MyCheckouts' }}
                     />
@@ -99,15 +169,33 @@ const AccountStackNavigator = () => {
                          name="MyLists"
                          component={MyLists}
                          options={{
-                              title: getTermFromDictionary(language, 'lists'),
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'lists');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'lists'),
                          }}
                     />
-                    <Stack.Screen name="MyList" component={MyList} options={({ route }) => ({ title: route.params.title })} />
+                    <Stack.Screen
+                         name="MyList"
+                         component={MyList}
+                         options={({ route }) => ({
+                              header: () => {
+                                   const title = route.params.title;
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              title: route.params.title
+                         })}
+                    />
                     <Stack.Screen
                          name="ListItem"
                          component={GroupedWorkScreen}
                          options={({ route }) => ({
-                              title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                              header: () => {
+                                   const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                          })}
                          initialParams={{ prevRoute: 'MyList' }}
                     />
@@ -115,7 +203,11 @@ const AccountStackNavigator = () => {
                          name="ListItemEvent"
                          component={EventScreen}
                          options={({ route }) => ({
-                              title: route.params.title ?? getTermFromDictionary(language, 'event_details'),
+                              header: () => {
+                                   const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              //title: route.params.title ?? getTermFromDictionary(language, 'event_details'),
                          })}
                          initialParams={{ prevRoute: 'MyList' }}
                     />
@@ -125,7 +217,11 @@ const AccountStackNavigator = () => {
                          name="MySavedSearches"
                          component={MySavedSearches}
                          options={{
-                              title: getTermFromDictionary(language, 'saved_searches'),
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'saved_searches');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'saved_searches'),
                          }}
                     />
                     <Stack.Screen
@@ -150,7 +246,11 @@ const AccountStackNavigator = () => {
                          name="SavedSearchItem"
                          component={GroupedWorkScreen}
                          options={({ route }) => ({
-                              title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                              header: () => {
+                                   const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                          })}
                          initialParams={{ prevRoute: 'MySavedSearch' }}
                     />
@@ -160,14 +260,22 @@ const AccountStackNavigator = () => {
                          name="MyReadingHistory"
                          component={MyReadingHistory}
                          options={{
-                              title: getTermFromDictionary(language, 'my_reading_history'),
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'my_reading_history');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'my_reading_history'),
                          }}
                     />
                     <Stack.Screen
                          name="ItemDetails"
                          component={GroupedWorkScreen}
                          options={({ route }) => ({
-                              title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                              header: () => {
+                                   const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                          })}
                          initialParams={{ prevRoute: 'MyReadingHistory' }}
                     />
@@ -177,7 +285,11 @@ const AccountStackNavigator = () => {
                          name="MyEvents"
                          component={MyEvents}
                          options={{
-                              title: getTermFromDictionary(language, 'my_events'),
+                              header: () => {
+                                   const title = getTermFromDictionary(language, 'my_events');
+                                   return <TitleWithLogo title={title} hideBack={true} />;
+                              },
+                              //title: getTermFromDictionary(language, 'my_events'),
                          }}
                     />
                     <Stack.Screen
@@ -185,7 +297,11 @@ const AccountStackNavigator = () => {
                          component={EventScreen}
                          initialParams={{ prevRoute: 'MyEvents' }}
                          options={({ route }) => ({
-                              title: route.params.title ?? getTermFromDictionary(language, 'event_details'),
+                              header: () => {
+                                   const title = route.params.title ?? getTermFromDictionary(language, 'event_details');
+                                   return <TitleWithLogo title={title} />;
+                              },
+                              //title: route.params.title ?? getTermFromDictionary(language, 'event_details'),
                          })}
                     />
                </Stack.Group>
@@ -193,7 +309,11 @@ const AccountStackNavigator = () => {
                     name="MyNotificationHistory"
                     component={MyNotificationHistory}
                     options={{
-                         title: getTermFromDictionary(language, 'my_notification_history'),
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'my_notification_history');
+                              return <TitleWithLogo title={title} hideBack={true} />;
+                         },
+                         //title: getTermFromDictionary(language, 'my_notification_history'),
                     }}
                />
                <Stack.Screen
@@ -204,7 +324,13 @@ const AccountStackNavigator = () => {
                          presentation: 'modal',
                     }}
                />
-               <Stack.Screen name="LoadSavedSearch" component={LoadSavedSearch} options={({ route }) => ({ title: route.params.name })} />
+               <Stack.Screen
+                    name="LoadSavedSearch"
+                    component={LoadSavedSearch}
+                    options={({ route }) => ({
+                         title: route.params.name
+                    })}
+               />
                <Stack.Screen
                     name="CopyDetails"
                     component={WhereIsIt}

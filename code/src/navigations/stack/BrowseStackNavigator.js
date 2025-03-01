@@ -2,8 +2,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ChevronLeftIcon, CloseIcon, Pressable, Icon } from 'native-base';
 import React from 'react';
+import Platform from 'react-native';
 import Scanner from '../../components/Scanner';
-import { LanguageContext, ThemeContext } from '../../context/initialContext';
+import TitleWithLogo from '../../components/TitleWithLogo'
+import { LanguageContext, LibrarySystemContext, ThemeContext } from '../../context/initialContext';
 import { navigate } from '../../helpers/RootNavigator';
 
 import { DiscoverHomeScreen } from '../../screens/BrowseCategory/Home';
@@ -41,14 +43,22 @@ const BrowseStackNavigator = () => {
                     name="HomeScreen"
                     component={DiscoverHomeScreen}
                     options={{
-                         title: getTermFromDictionary(language, 'nav_discover'),
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'nav_discover');
+                              return <TitleWithLogo title={title} hideBack={true} />;
+                         },
+                         //title: getTermFromDictionary(language, 'nav_discover'),
                     }}
                />
                <Stack.Screen
                     name="GroupedWorkScreen"
                     component={GroupedWorkScreen}
                     options={({ route }) => ({
-                         title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                         header: () => {
+                              const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                     })}
                     initialParams={{ prevRoute: 'HomeScreen' }}
                />
@@ -114,14 +124,22 @@ const BrowseStackNavigator = () => {
                     name="SearchByCategory"
                     component={SearchResultsForBrowseCategory}
                     options={({ route }) => ({
-                         title: getTermFromDictionary(language, 'results_for') + ' ' + route.params.title,
+                         //title: getTermFromDictionary(language, 'results_for') + ' ' + route.params.title,
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'results_for') + ' ' + route.params.title;
+                              return <TitleWithLogo title={title} />
+                         },
                     })}
                />
                <Stack.Screen
                     name="CategoryResultItem"
                     component={GroupedWorkScreen}
                     options={({ route }) => ({
-                         title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                         header: () => {
+                              const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                     })}
                     initialParams={{ prevRoute: 'SearchResults' }}
                />
@@ -129,21 +147,33 @@ const BrowseStackNavigator = () => {
                     name="SearchByList"
                     component={SearchResultsForList}
                     options={({ route }) => ({
-                         title: route.params?.title ? getTermFromDictionary(language, 'results_for') + ' ' + route.params.title : getTermFromDictionary(language, 'search_results'),
+                         header: () => {
+                              const title = route.params?.title ? getTermFromDictionary(language, 'results_for') + ' ' + route.params.title : getTermFromDictionary(language, 'search_results');
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: route.params?.title ? getTermFromDictionary(language, 'results_for') + ' ' + route.params.title : getTermFromDictionary(language, 'search_results'),
                     })}
                />
                <Stack.Screen
                     name="ListResults"
                     component={SearchResultsForList}
                     options={({ route }) => ({
-                         title: route.params?.title ? getTermFromDictionary(language, 'results_for') + ' ' + route.params.title : getTermFromDictionary(language, 'search_results'),
+                          header: () => {
+                              const title = route.params?.title ? getTermFromDictionary(language, 'results_for') + ' ' + route.params.title : getTermFromDictionary(language, 'search_results');
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: route.params?.title ? getTermFromDictionary(language, 'results_for') + ' ' + route.params.title : getTermFromDictionary(language, 'search_results'),
                     })}
                />
                <Stack.Screen
                     name="ListResultItem"
                     component={GroupedWorkScreen}
                     options={({ route }) => ({
-                         title: route.params?.title ?? getTermFromDictionary(language, 'item_details'),
+                         header: () => {
+                              const title = route.params?.title ?? getTermFromDictionary(language, 'item_details');
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: route.params?.title ?? getTermFromDictionary(language, 'item_details'),
                     })}
                     initialParams={{ prevRoute: 'SearchResults' }}
                />
@@ -152,14 +182,22 @@ const BrowseStackNavigator = () => {
                     name="SearchBySavedSearch"
                     component={SearchResultsForSavedSearch}
                     options={({ route }) => ({
-                         title: getTermFromDictionary(language, 'results_for') + ' ' + route.params.title,
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'results_for') + ' ' + route.params.title;
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: getTermFromDictionary(language, 'results_for') + ' ' + route.params.title,
                     })}
                />
                <Stack.Screen
                     name="SavedSearchResultItem"
                     component={GroupedWorkScreen}
                     options={({ route }) => ({
-                         title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
+                         header: () => {
+                              const title = route.params.title ?? getTermFromDictionary(language, 'item_details');
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: route.params.title ?? getTermFromDictionary(language, 'item_details'),
                     })}
                     initialParams={{ prevRoute: 'SearchResults' }}
                />
@@ -167,7 +205,11 @@ const BrowseStackNavigator = () => {
                     name="SearchResults"
                     component={SearchResults}
                     options={({ route }) => ({
-                         title: getTermFromDictionary(language, 'results_for') + ' ' + route.params.term,
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'results_for') + ' ' + route.params.term;
+                              return <TitleWithLogo title={title} />
+                         },
+//                         title: getTermFromDictionary(language, 'results_for') + ' ' + route.params.term,
                          params: {
                               pendingParams: [],
                          },
@@ -193,7 +235,11 @@ const BrowseStackNavigator = () => {
                     name="EventScreen"
                     component={EventScreen}
                     options={({ route }) => ({
-                         title: route.params.title ?? getTermFromDictionary(language, 'event_details'),
+                         header: () => {
+                              const title = route.params.title ?? getTermFromDictionary(language, 'event_details');
+                              return <TitleWithLogo title={title} />
+                         },
+                         //title: route.params.title ?? getTermFromDictionary(language, 'event_details'),
                     })}
                     initialParams={{ prevRoute: 'HomeScreen' }}
                />

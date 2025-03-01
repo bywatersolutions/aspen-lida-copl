@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ChevronLeftIcon, CloseIcon, Pressable, Icon } from 'native-base';
 import React from 'react';
 
 import { LanguageContext, UserContext } from '../../context/initialContext';
@@ -8,6 +9,8 @@ import { SelfCheckOut } from '../../screens/SCO/SelfCheckOut';
 import { FinishCheckOutSession } from '../../screens/SCO/FinishSelfCheckoutSession';
 import _ from 'lodash';
 import SelfCheckScanner from '../../screens/SCO/SelfCheckScanner';
+
+import TitleWithLogo from '../../components/TitleWithLogo'
 
 const SelfCheckOutStackNavigator = () => {
      const { language } = React.useContext(LanguageContext);
@@ -22,22 +25,62 @@ const SelfCheckOutStackNavigator = () => {
      return (
           <Stack.Navigator
                initialRouteName={defaultRoute}
-               screenOptions={{
+               screenOptions={({ navigation, route }) => ({
                     headerShown: true,
                     headerBackTitleVisible: false,
                     gestureEnabled: false,
-               }}>
-               <Stack.Screen name="StartCheckOutSession" component={StartCheckOutSession} options={{ title: getTermFromDictionary(language, 'self_checkout') }} initialParams={{ startNew: true }} />
-               <Stack.Screen name="SelfCheckOut" component={SelfCheckOut} options={{ title: getTermFromDictionary(language, 'self_checkout') }} initialParams={{ startNew: true }} />
+               })}>
+               <Stack.Screen
+                    name="StartCheckOutSession"
+                    component={StartCheckOutSession}
+                    options={{
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'nav_discover');
+                              return <TitleWithLogo title={title} />;
+                         },
+                         //title: getTermFromDictionary(language, 'self_checkout')
+                    }}
+                    initialParams={{ startNew: true }}
+               />
+               <Stack.Screen
+                    name="SelfCheckOut"
+                    component={SelfCheckOut}
+                    options={({ navigation }) => ({
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'self_checkout');
+                              return <TitleWithLogo title={title} hideBack={true} />;
+                         },
+                         //title: getTermFromDictionary(language, 'self_checkout')
+                    })}
+                    initialParams={{ startNew: true }}
+               />
                <Stack.Screen
                     name="SelfCheckOutScanner"
                     component={SelfCheckScanner}
-                    options={{
+                    options={({ navigation }) => ({
                          presentation: 'modal',
                          title: 'Scanner',
+                         headerLeft: () => {
+                              return <></>;
+                         },
+                         headerRight: () => (
+                              <Pressable onPress={() => navigation.goBack()} mr={3} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
+                                   <CloseIcon color="primary.baseContrast" size={5} />
+                              </Pressable>
+                         ),
+                    })}
+               />
+               <Stack.Screen
+                    name="FinishCheckOutSession"
+                    component={FinishCheckOutSession}
+                    options={{
+                         header: () => {
+                              const title = getTermFromDictionary(language, 'finish_checkout_session');
+                              return <TitleWithLogo title={title} hideBack={true} />;
+                         },
+                         //title: getTermFromDictionary(language, 'finish_checkout_session')
                     }}
                />
-               <Stack.Screen name="FinishCheckOutSession" component={FinishCheckOutSession} options={{ title: getTermFromDictionary(language, 'finish_checkout_session') }} />
           </Stack.Navigator>
      );
 };

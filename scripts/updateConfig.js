@@ -1,7 +1,4 @@
 const fs = require('fs');
-const data = require('../app-configs/apps.json');
-const build = require('../app-configs/build.json');
-const version = require('../version.json');
 
 function getArgs() {
      const args = {};
@@ -25,6 +22,11 @@ function getArgs() {
 
 const args = getArgs();
 const instance = args.instance;
+
+const data = require('../app-configs/' + args.env + '-apps.json');
+const version = require('../version.json');
+const build = require('../app-configs/build.json');
+
 const app = data[instance];
 
 let owner;
@@ -148,7 +150,7 @@ const app_config = {
      },
      extra: {
           apiUrl: app['discoveryUrl'],
-          greenhouseUrl: owner['greenhouseUrl'],
+          greenhouseUrl: app['greenhouseUrl'],
           loginLogo: app['discoveryUrl'] + 'API/SystemAPI?method=getLogoFile&themeId=' + app['themeId'] + '&type=appLogin&slug=' + app['slug'],
           libraryCardLogo: app['discoveryUrl'] + 'API/SystemAPI?method=getLogoFile&themeId=' + app['themeId'] + '&type=logoApp&slug=' + app['slug'],
           backgroundColor: app['background'],
@@ -179,7 +181,7 @@ const app_config = {
           [
                '@sentry/react-native/expo',
                {
-                    authToken: app['sentryAuth'],
+                    authToken: owner['sentryAuthToken'],
                     organization: owner['expoProjectOwner'],
                     project: app['sentryProject'],
                },

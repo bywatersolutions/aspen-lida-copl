@@ -444,7 +444,7 @@ const NotificationToggle = (data) => {
 
      const updatePreference = async (pref, value) => {
           let allowNotification = true;
-          if (value === 0 || value === 'false' || value === false) {
+          if (value === 0 || value === 'false' || value === false || value === '0') {
                allowNotification = true;
           } else {
                allowNotification = false;

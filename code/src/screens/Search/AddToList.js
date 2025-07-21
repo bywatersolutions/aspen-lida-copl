@@ -128,9 +128,9 @@ export const AddToList = (props) => {
 
      const SmallButton = () => {
           return (
-               <Button size="sm" variant="link" bgColor={theme['colors']['tertiary']['500']} onPress={toggleModal} style={{ flex: 1, flexWrap: 'wrap' }}>
-                    <ButtonIcon color={theme['colors']['tertiary']['500-text']} as={MaterialIcons} name="bookmark"/>
-                    <ButtonText color={theme['colors']['tertiary']['500-text']}>{getTermFromDictionary(language, 'add_to_list')}</ButtonText>
+               <Button mt="$1" size="xs" variant="link" onPress={toggleModal}>
+                    <ButtonIcon color={theme['colors']['tertiary']['500']} as={MaterialIcons} name="bookmark"/>
+                    <ButtonText color={theme['colors']['tertiary']['500']}>{getTermFromDictionary(language, 'add_to_list')}</ButtonText>
                </Button>
           );
      };

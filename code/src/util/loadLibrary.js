@@ -179,12 +179,8 @@ export async function getLocalIllForm(url, id) {
      const response = await api.post('/SystemAPI?method=getLocalIllForm', postBody);
      if (response.ok) {
           LIBRARY.localIll = response.data.result;
-          return response.data.result;
-     } else {
-          const error = getErrorMessage({ statusCode: response.status, problem: response.problem, sendToSentry: true });
-          popToast(error.title, error.message, 'error');
-          logDebugMessage(response);
      }
+     return response;
 }
 
 export function formatDiscoveryVersion(payload) {

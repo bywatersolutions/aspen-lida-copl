@@ -1,0 +1,15 @@
+{
+  "name": "Orange Public Library",
+  "slug": "copl",
+  "easId": "c43d2f28-2459-4fef-bba7-e150538f71f1",
+  "reverseDns": "org.aspendiscovery.copl",
+  "discoveryUrl": "https://copl.aspendiscovery.org/",
+  "greenhouseUrl": "https://copl.aspendiscovery.org/",
+  "libraryId": "1",
+  "themeId": "1",
+  "background": "#ffffff",
+  "sentryProject": "aspen-lida-copl",
+  "sentryDsn": "https://a438a2746c0606a86c06c3c440a35866@o994439.ingest.us.sentry.io/4507215801548800",
+  "ascAppId": "6502454345",
+  "logLevel": "0"
+}
